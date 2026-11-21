@@ -3,7 +3,8 @@ import { Outlet, createRootRoute, useRouter } from '@tanstack/react-router'
 import { Crt } from '../crt/Crt'
 import { toggleMute } from '../terminal/audio'
 import { Boot } from '../terminal/Boot'
-import { go } from '../terminal/navigate'
+import { goUp } from '../terminal/navigate'
+import { StatusBar } from '../terminal/StatusBar'
 
 export const Route = createRootRoute({ component: Root })
 
@@ -19,8 +20,7 @@ function Root() {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return
       if (e.key === 'Escape') {
-        const parent = router.state.location.pathname.split('/').filter(Boolean).slice(0, -1)
-        void go(router, '/' + parent.join('/'))
+        void goUp(router)
         return
       }
       if (e.key === 'm') {
@@ -50,5 +50,17 @@ function Root() {
     return () => window.removeEventListener('keydown', onKey)
   }, [booted, router])
 
-  return <Crt>{booted ? <Outlet /> : <Boot onBoot={boot} />}</Crt>
+  return (
+    <Crt>
+      {booted ? (
+        <>
+          <Outlet />
+          {/* After the page, so it is drawn on top. Touch devices only. */}
+          <StatusBar />
+        </>
+      ) : (
+        <Boot onBoot={boot} />
+      )}
+    </Crt>
+  )
 }

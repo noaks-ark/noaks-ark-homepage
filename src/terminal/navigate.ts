@@ -41,6 +41,12 @@ export async function wipe() {
   await sleep(140)
 }
 
+/** Go up one level: /projects/x -> /projects -> /. What Escape and the mobile Back button do. */
+export function goUp(router: AnyRouter) {
+  const parent = router.state.location.pathname.split('/').filter(Boolean).slice(0, -1)
+  return go(router, '/' + parent.join('/'))
+}
+
 /** Wipe the screen, then go to `to`. Ignored while a wipe is in progress. */
 export async function go(router: AnyRouter, to: string) {
   if (busy || router.state.location.pathname === to) return

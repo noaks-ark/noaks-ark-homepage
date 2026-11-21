@@ -4,6 +4,33 @@
  * here show up on the screen. Shadows, gradients and transforms do not.
  */
 
+/*
+ * JetBrains Mono Nerd Font (SIL Open Font License 1.1): JetBrains Mono plus
+ * the Nerd Fonts icon set, block and box-drawing characters. Icons are typed
+ * as characters, e.g. "\uf07c"; look them up at nerdfonts.com/cheat-sheet.
+ */
+@font-face {
+  font-family: 'JetBrainsMono Nerd Font';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('../fonts/JetBrainsMonoNerdFont-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrainsMono Nerd Font';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('../fonts/JetBrainsMonoNerdFont-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrainsMono Nerd Font';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url('../fonts/JetBrainsMonoNerdFont-Italic.woff2') format('woff2');
+}
+
 :root {
   /* EverforestDarker, from ~/.config/ghostty/themes */
   --bg: #0b0f10;
@@ -16,6 +43,34 @@
   --purple: #d699b6;
   --aqua: #83c092;
   --orange: #e69875;
+  /* The offset shadow behind the banner letters. */
+  --orange-shadow: #7d4f3b;
+  /* Faint divider lines (mobile menu rows, status bar). */
+  --line: #1e2a2c;
+}
+
+/*
+ * Follows the system appearance, like the Ghostty config
+ * (theme = light:Everforest Light Med,dark:EverforestDarker).
+ * Accents use the light theme's bright set (palette 9-14): its pastel set is
+ * the same as the dark theme's and too faint on a cream background.
+ */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Everforest Light Med, bundled with Ghostty */
+    --bg: #efebd4;
+    --fg: #5c6a72;
+    --dim: #7a8478;
+    --red: #f85552;
+    --green: #8da101;
+    --yellow: #dfa000;
+    --blue: #3a94c5;
+    --purple: #df69ba;
+    --aqua: #35a77c;
+    --orange: #f57d26;
+    --orange-shadow: #f9bd8e;
+    --line: #d6d1b8;
+  }
 }
 
 *,
@@ -33,7 +88,7 @@ body,
 }
 
 body {
-  font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-family: 'JetBrainsMono Nerd Font', ui-monospace, 'SF Mono', Menlo, monospace;
   font-size: clamp(15px, 1.5vw, 22px);
   line-height: 1.6;
   color: var(--fg);
@@ -290,5 +345,217 @@ p.item + :not(p.item) {
   }
   .preview {
     display: none;
+  }
+}
+
+/* ---------- Home: LazyVim-style dashboard ---------- */
+
+.home {
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Block-letter banner (Banner.tsx). One cell is one "pixel" of a letter. */
+.banner {
+  --banner-cell: min(0.8ch, calc((100vw - 20vmin) / 64));
+  --banner-row: calc(var(--banner-cell) * 2);
+  margin: 0 0 4em;
+}
+
+.banner-row {
+  position: relative;
+  height: var(--banner-row);
+}
+
+.banner-block,
+.banner-shadow {
+  position: absolute;
+  top: 0;
+  /* A hair taller than the row, so no seams show between rows. */
+  height: calc(var(--banner-row) + 0.5px);
+}
+
+.banner-block {
+  background: var(--orange);
+}
+
+.banner-shadow {
+  background: var(--orange-shadow);
+  margin-left: calc(var(--banner-cell) * 0.5);
+  margin-top: calc(var(--banner-row) * 0.3);
+}
+
+.menu[data-variant='dashboard'] {
+  width: min(38ch, 100%);
+  margin-bottom: 0;
+}
+
+.menu[data-variant='dashboard'] .item {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1.1em;
+  color: var(--yellow);
+}
+
+.menu[data-variant='dashboard'] .item[data-selected] .item-label {
+  background: transparent;
+  color: inherit;
+}
+
+.item-cursor {
+  background: var(--orange);
+  color: var(--bg);
+}
+
+.item-icon {
+  width: 4ch;
+}
+
+.item-key {
+  margin-left: auto;
+  color: var(--purple);
+}
+
+.home-footer {
+  margin: 0.6em 0 0;
+  color: var(--orange);
+  font-size: 0.85em;
+}
+
+/* =====================================================================
+ * Mobile. Everything above is the desktop design and is not touched here.
+ * Two switches:
+ *   narrow screen (max-width: 700px)       -> layout
+ *   touch device  (hover: none, coarse)    -> fingers instead of keys
+ * The shader has matching overrides in src/crt/config.ts (crtMobile).
+ * ===================================================================== */
+
+.touch-only,
+.statusbar {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .screen {
+    /* Slimmer margins; the glass is less curved here, so text can go wider. */
+    padding: max(26px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 28px
+      max(18px, env(safe-area-inset-left));
+  }
+
+  .banner {
+    --banner-cell: min(0.8ch, calc((100vw - 44px) / 64));
+    margin-bottom: 3em;
+  }
+
+  /* Menu rows: the note goes on its own line instead of wrapping mid-phrase. */
+  .item-note {
+    display: block;
+    padding-left: 2ch;
+    font-size: 0.85em;
+    white-space: normal;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Keyboard-only furniture. */
+  .keys-only,
+  .hint,
+  .home-footer,
+  .item-marker,
+  .item-key {
+    display: none;
+  }
+  .touch-only {
+    display: inline;
+  }
+
+  /* Room for the status bar. */
+  .screen {
+    padding-bottom: calc(52px + env(safe-area-inset-bottom) + 28px);
+  }
+
+  /* Menu rows become finger-sized, with a divider between them. */
+  a.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+    min-height: 44px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+    white-space: normal;
+  }
+  .item-note {
+    padding-left: 0;
+  }
+
+  /* "Selected" means nothing without a keyboard; show the press instead. */
+  a.item[data-selected] .item-label,
+  .item-cursor {
+    background: transparent;
+    color: inherit;
+  }
+  a.item:active,
+  a.item:active * {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .menu[data-variant='dashboard'] a.item {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  /* Back / Visit site on a project page: two buttons side by side. */
+  .menu[data-direction='row'] {
+    column-gap: 12px;
+  }
+  .menu[data-direction='row'] a.item {
+    flex: 1;
+    align-items: center;
+    border: 1px solid var(--dim);
+  }
+
+  /* Status line: back, where you are, sound. */
+  .statusbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: calc(52px + env(safe-area-inset-bottom));
+    padding: 0 max(14px, env(safe-area-inset-right)) env(safe-area-inset-bottom)
+      max(14px, env(safe-area-inset-left));
+    background: var(--bg);
+    border-top: 1px solid var(--dim);
+    font-size: 0.8em;
+  }
+
+  .statusbar-path {
+    flex: 1;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+
+  .statusbar-button {
+    min-width: 44px;
+    height: 44px;
+    padding: 0 10px;
+    border: 0;
+    background: transparent;
+    color: var(--fg);
+    font: inherit;
+    white-space: nowrap;
+  }
+  .statusbar-button:active {
+    background: var(--fg);
+    color: var(--bg);
   }
 }

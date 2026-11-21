@@ -25,6 +25,8 @@ export interface TypedOptions {
 export interface Segment {
   text: string
   href?: string
+  /** Wraps the segment in a <span> with this class. */
+  className?: string
 }
 
 /** Flattens JSX children to the plain string that gets typed. */
@@ -118,13 +120,21 @@ export function TypedText({ text, shown, typing, segments }: TypedTextProps) {
     const part = segment.text.slice(0, Math.max(0, shown - offset))
     offset += segment.text.length
     if (!part) return null
-    return segment.href ? (
-      <TypedLink key={i} href={segment.href}>
-        {part}
-      </TypedLink>
-    ) : (
-      part
-    )
+    if (segment.href) {
+      return (
+        <TypedLink key={i} href={segment.href}>
+          {part}
+        </TypedLink>
+      )
+    }
+    if (segment.className) {
+      return (
+        <span key={i} className={segment.className}>
+          {part}
+        </span>
+      )
+    }
+    return part
   })
   return (
     <>

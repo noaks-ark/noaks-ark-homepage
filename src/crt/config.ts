@@ -28,8 +28,20 @@ export const crtConfig = {
   bezel: '#030506',
   /** Cap on devicePixelRatio, to keep the texture upload cheap. */
   maxDpr: 2,
-  /** Length of the power-on animation in ms. */
+  /** Length of the power-on sweep in ms (plays when the visitor boots). */
   powerOnMs: 700,
+  /** Length of the fade-in when the page first loads, in ms. */
+  fadeInMs: 600,
+}
+
+/**
+ * Overrides for narrow screens (max-width: 700px, the same breakpoint as the
+ * Mobile section of theme.css). Less curvature keeps text straight on a tall
+ * narrow screen and makes taps land where the text is drawn.
+ */
+export const crtMobile: Partial<typeof crtConfig> = {
+  warp: 0.2,
+  corner: 16,
 }
 
 if (import.meta.env.DEV) {

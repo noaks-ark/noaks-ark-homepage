@@ -10,6 +10,8 @@ uniform vec2 uRes;      // drawing buffer size in device pixels
 uniform float uDpr;
 uniform float uTime;    // seconds
 uniform float uPower;   // 0 = off, 1 = fully on
+uniform vec3 uBg;       // the page's background colour
+uniform float uFade;    // 0 = black, 1 = full brightness (fade-in on load)
 
 uniform float warp;
 uniform float scan;
@@ -70,7 +72,10 @@ void main() {
     textureLod(uTex, beam, 2.0).rgb * 0.3 +
     textureLod(uTex, beam, 3.5).rgb * 0.4 +
     textureLod(uTex, beam, 5.0).rgb * 0.3;
-  color += bloom * glow;
+  // Only what is brighter than the page background glows. On a dark page
+  // that is everything; on a light page it keeps the background from
+  // blowing out to white.
+  color += max(bloom - uBg, 0.0) * glow;
 
   // --- bettercrt: scanlines (measured in CSS pixels, following the curve) ---
   float line = sin(uv.y * uRes.y / uDpr * PI / scanSize);
@@ -90,7 +95,7 @@ void main() {
   // the squashed beam burns white-hot until the picture has opened
   float hot = 1.0 - smoothstep(0.3, 0.6, p);
   color = mix(color, vec3(0.85, 0.9, 0.85), hot * 0.7) * (1.0 + hot);
-  color *= lit;
+  color *= lit * uFade;
 
   fragColor = vec4(mix(bezel, color, glass), 1.0);
 }

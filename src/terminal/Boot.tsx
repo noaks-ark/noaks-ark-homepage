@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { powerOn } from '../crt/engine'
-import { unlockAudio } from './audio'
+import { playBoot, startStatic, unlockAudio } from './audio'
 import { Cursor } from './Cursor'
 
 /**
  * First screen after every page load. Browsers block audio until the visitor
- * interacts, so the first key or tap unlocks sound and powers the CRT on.
+ * interacts, so the first key or tap unlocks sound, plays the power-on sound
+ * and runs the CRT's power-on sweep.
  */
 export function Boot({ onBoot }: { onBoot: () => void }) {
   useEffect(() => {
@@ -16,6 +17,8 @@ export function Boot({ onBoot }: { onBoot: () => void }) {
         e.preventDefault()
       }
       unlockAudio()
+      playBoot()
+      startStatic()
       powerOn()
       onBoot()
     }
@@ -32,7 +35,8 @@ export function Boot({ onBoot }: { onBoot: () => void }) {
       <p className="dim">NOAKS ARK TERMINAL</p>
       <p className="dim">SYSTEM READY</p>
       <p>
-        PRESS ANY KEY TO BOOT
+        <span className="keys-only">PRESS ANY KEY TO BOOT</span>
+        <span className="touch-only">TAP TO BOOT</span>
         <Cursor />
       </p>
     </main>

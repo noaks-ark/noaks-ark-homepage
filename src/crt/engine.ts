@@ -1,4 +1,4 @@
-import { crtConfig } from './config'
+import { crtConfig, crtMobile } from './config'
 import { paint, paintVideos } from './painter'
 import fragSource from './crt.frag.glsl?raw'
 
@@ -28,6 +28,12 @@ function compile(gl: WebGL2RenderingContext, type: number, source: string) {
     throw new Error(gl.getShaderInfoLog(shader) ?? 'shader compile failed')
   }
   return shader
+}
+
+/** Parses a computed colour such as "rgb(239, 235, 212)". */
+function cssToRgb(color: string): [number, number, number] {
+  const [r = 0, g = 0, b = 0] = (color.match(/[\d.]+/g) ?? []).map(Number)
+  return [r / 255, g / 255, b / 255]
 }
 
 function hexToRgb(hex: string): [number, number, number] {
@@ -77,12 +83,16 @@ export function createCrt(canvas: HTMLCanvasElement, source: HTMLElement): Crt |
   const ctx = page.getContext('2d', { alpha: false })!
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  const narrow = window.matchMedia('(max-width: 700px)')
   let width = 0
   let height = 0
   let dpr = 1
   let dirty = true
+  let background: [number, number, number] = [0, 0, 0]
   let raf = 0
-  let powerStart = performance.now()
+  // The page fades in on load; the power-on sweep only runs when asked.
+  let powerStart = -Infinity
+  let fadeStart = -1
 
   const invalidate = () => {
     dirty = true
@@ -97,12 +107,16 @@ export function createCrt(canvas: HTMLCanvasElement, source: HTMLElement): Crt |
   const listen = (target: EventTarget, type: string, capture = false) =>
     target.addEventListener(type, invalidate, { signal: events.signal, passive: true, capture })
   listen(window, 'resize')
+  listen(window.matchMedia('(prefers-color-scheme: light)'), 'change') // system theme switched
   listen(source, 'scroll', true)
   listen(source, 'load', true) // images
   listen(source, 'loadedmetadata', true) // videos get their size
   listen(source, 'loadeddata', true)
   listen(source, 'pointermove')
   listen(source, 'pointerleave')
+  listen(source, 'pointerdown') // :active styles
+  listen(window, 'pointerup')
+  listen(window, 'pointercancel')
   listen(source, 'focusin')
   listen(source, 'focusout')
   listen(document.fonts, 'loadingdone')
@@ -130,6 +144,7 @@ export function createCrt(canvas: HTMLCanvasElement, source: HTMLElement): Crt |
     if (dirty || source.getAnimations({ subtree: true }).length > 0) {
       dirty = false
       paint(ctx, source, width, height, dpr)
+      background = cssToRgb(getComputedStyle(source).backgroundColor)
       upload = true
     } else {
       // Nothing changed except video frames: redraw only those rectangles
@@ -142,18 +157,23 @@ export function createCrt(canvas: HTMLCanvasElement, source: HTMLElement): Crt |
     }
 
     const still = reducedMotion.matches
-    for (const [name, value] of Object.entries(crtConfig)) {
+    const config = narrow.matches ? { ...crtConfig, ...crtMobile } : crtConfig
+    for (const [name, value] of Object.entries(config)) {
       if (typeof value === 'number') gl.uniform1f(loc(name), value)
     }
     if (still) {
       gl.uniform1f(loc('flicker'), 0)
       gl.uniform1f(loc('roll'), 0)
     }
-    gl.uniform3fv(loc('bezel'), hexToRgb(crtConfig.bezel))
+    gl.uniform3fv(loc('bezel'), hexToRgb(config.bezel))
+    gl.uniform3fv(loc('uBg'), background)
     gl.uniform2f(loc('uRes'), canvas.width, canvas.height)
     gl.uniform1f(loc('uDpr'), dpr)
     gl.uniform1f(loc('uTime'), still ? 0 : now / 1000)
     gl.uniform1f(loc('uPower'), still ? 1 : Math.min(1, (now - powerStart) / crtConfig.powerOnMs))
+    if (fadeStart < 0) fadeStart = now
+    const fade = still ? 1 : Math.min(1, (now - fadeStart) / crtConfig.fadeInMs)
+    gl.uniform1f(loc('uFade'), fade * fade * (3 - 2 * fade))
     gl.drawArrays(gl.TRIANGLES, 0, 3)
   }
   raf = requestAnimationFrame(frame)
