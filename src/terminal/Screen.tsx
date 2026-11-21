@@ -1,5 +1,5 @@
-import { createElement, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { setCurrentScreen } from './navigate'
+import { createElement, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { collectLines, rowStep, setCurrentScreen } from './navigate'
 import { Sequencer, SequencerContext, useSequencer } from './sequencer'
 
 interface ScreenProps {
@@ -30,16 +30,36 @@ function markSeen(key: string) {
  * Enter or Space skips the typing; navigating away wipes the screen.
  *
  * Give it a `seenKey` to type only on the first visit in this tab: on later
- * visits everything appears at once, without typing or key sounds.
+ * visits the rows fill in from the top, the reverse of the exit wipe, without
+ * typing or key sounds.
  */
 export function Screen({ children, className, seenKey }: ScreenProps) {
   const ref = useRef<HTMLElement>(null)
+  // Decided once, when the screen is created.
+  const [revisit] = useState(() => !!seenKey && wasSeen(seenKey))
   const seq = useMemo(() => {
     const sequencer = new Sequencer()
-    if (seenKey && wasSeen(seenKey)) sequencer.fast = true
+    if (revisit) sequencer.fast = true
     return sequencer
-    // Decided once, when the screen is created.
-  }, [])
+  }, [revisit])
+
+  // Revisit: hide every row before the first paint, then bring them back one
+  // by one. An attribute is used rather than inline style because <Reveal>
+  // already owns its inline visibility.
+  useLayoutEffect(() => {
+    if (!revisit || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const lines = collectLines(ref.current!)
+    for (const line of lines) line.setAttribute('data-unrevealed', '')
+    let next = 0
+    const timer = setInterval(() => {
+      lines[next++]?.removeAttribute('data-unrevealed')
+      if (next >= lines.length) clearInterval(timer)
+    }, rowStep(lines.length))
+    return () => {
+      clearInterval(timer)
+      for (const line of lines) line.removeAttribute('data-unrevealed')
+    }
+  }, [revisit])
 
   useEffect(() => {
     if (seenKey) markSeen(seenKey)

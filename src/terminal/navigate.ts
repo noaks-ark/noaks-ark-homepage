@@ -14,7 +14,7 @@ export function setCurrentScreen(el: HTMLElement | null) {
  * The rows to clear: everything marked data-line, plus any direct child of
  * the screen that has no marked rows inside it.
  */
-function collectLines(root: HTMLElement) {
+export function collectLines(root: HTMLElement) {
   const lines = new Set<HTMLElement>(root.querySelectorAll<HTMLElement>('[data-line]'))
   for (const child of root.children) {
     if (child instanceof HTMLElement && !child.matches('[data-line]') && !child.querySelector('[data-line]')) {
@@ -26,11 +26,14 @@ function collectLines(root: HTMLElement) {
   )
 }
 
+/** Milliseconds per row, so a page of any length takes about a third of a second. */
+export const rowStep = (rows: number) => Math.min(40, 360 / Math.max(1, rows))
+
 /** Clears the current screen row by row, bottom to top. */
 export async function wipe() {
   if (!screen) return
   const lines = collectLines(screen).reverse()
-  const step = Math.min(40, 360 / Math.max(1, lines.length))
+  const step = rowStep(lines.length)
   for (const line of lines) {
     line.style.visibility = 'hidden'
     await sleep(step)

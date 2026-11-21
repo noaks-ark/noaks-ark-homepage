@@ -99,6 +99,37 @@ a {
   color: var(--blue);
 }
 
+/* Text links. Menu rows (a.item) have their own selection highlight. */
+a:not(.item):hover,
+a:not(.item):focus-visible {
+  background: var(--yellow);
+  color: var(--bg);
+  outline: none;
+}
+
+h2 {
+  margin: 2em 0 0.8em;
+}
+
+/* A "- " list row, with wrapped lines indented under the text. */
+p.item {
+  display: block;
+  width: auto;
+  padding-left: 2ch;
+  text-indent: -2ch;
+  margin-bottom: 0.4em;
+  white-space: normal;
+  cursor: auto;
+}
+p.item + :not(p.item) {
+  margin-top: 1.2em;
+}
+
+/* Rows waiting their turn when a revisited page fills in (Screen.tsx). */
+[data-unrevealed] {
+  visibility: hidden !important;
+}
+
 .dim {
   color: var(--dim);
 }
@@ -179,24 +210,6 @@ a {
 
 .project em {
   font-style: italic;
-}
-
-/* A "- " list row, with wrapped lines indented under the text. */
-.project p.item {
-  display: block;
-  width: auto;
-  padding-left: 2ch;
-  text-indent: -2ch;
-  margin-bottom: 0.4em;
-  white-space: normal;
-  cursor: auto;
-}
-.project p.item + :not(p.item) {
-  margin-top: 1.2em;
-}
-
-.project h2 {
-  margin: 2em 0 0.8em;
 }
 
 .project figure {
