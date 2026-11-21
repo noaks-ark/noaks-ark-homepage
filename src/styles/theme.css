@@ -1,0 +1,281 @@
+/*
+ * Everything inside .crt-source is ordinary HTML + CSS. The CRT painter reads
+ * the computed styles, so colours, fonts, spacing, backgrounds and borders set
+ * here show up on the screen. Shadows, gradients and transforms do not.
+ */
+
+:root {
+  /* EverforestDarker, from ~/.config/ghostty/themes */
+  --bg: #0b0f10;
+  --fg: #d3c6aa;
+  --dim: #7a8478;
+  --red: #e67e80;
+  --green: #a7c080;
+  --yellow: #dbbc7f;
+  --blue: #7fbbb3;
+  --purple: #d699b6;
+  --aqua: #83c092;
+  --orange: #e69875;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: #030506;
+}
+
+body {
+  font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: clamp(15px, 1.5vw, 22px);
+  line-height: 1.6;
+  color: var(--fg);
+  overflow: hidden;
+}
+
+/* ---------- CRT layers ---------- */
+
+.crt-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.crt-source {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  background: var(--bg);
+  /* Invisible but still laid out, clickable and readable by screen readers. */
+  opacity: 0;
+}
+
+/* Fallback when WebGL2 is unavailable: show the plain page. */
+.no-webgl .crt-canvas {
+  display: none;
+}
+.no-webgl .crt-source {
+  opacity: 1;
+}
+
+/* ---------- Terminal content ---------- */
+
+.screen {
+  /* Keep text clear of the curved corners. */
+  padding: 9vmin 10vmin;
+  max-width: 90ch;
+  min-height: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+pre {
+  margin: 0 0 1.6em;
+  font: inherit;
+}
+
+h1 {
+  color: var(--green);
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+a {
+  color: var(--blue);
+}
+
+.dim {
+  color: var(--dim);
+}
+
+.boot p {
+  margin-bottom: 0;
+}
+.boot p:last-child {
+  margin-top: 1.6em;
+}
+
+.cursor {
+  /* Absolute so it never pushes the text that is still to be typed. */
+  position: absolute;
+  width: 1ch;
+  height: 1.25em;
+  margin-top: 0.18em;
+  background: var(--orange);
+}
+
+/* ---------- Menu ---------- */
+
+.menu {
+  margin: 0 0 1.6em;
+}
+
+.item {
+  display: block;
+  width: fit-content;
+  color: var(--fg);
+  text-decoration: none;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+
+.item-marker {
+  color: var(--orange);
+}
+
+.item[data-selected] .item-label {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.item-note {
+  color: var(--dim);
+}
+
+.hint {
+  color: var(--dim);
+  font-size: 0.8em;
+}
+
+.menu[data-direction='row'] {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2ch;
+}
+
+/* ---------- Project page ---------- */
+
+.project h1 {
+  margin-bottom: 0;
+}
+
+.project .meta {
+  color: var(--dim);
+}
+
+.project p {
+  margin-bottom: 1.2em;
+}
+
+.project strong {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+.project em {
+  font-style: italic;
+}
+
+/* A "- " list row, with wrapped lines indented under the text. */
+.project p.item {
+  display: block;
+  width: auto;
+  padding-left: 2ch;
+  text-indent: -2ch;
+  margin-bottom: 0.4em;
+  white-space: normal;
+  cursor: auto;
+}
+.project p.item + :not(p.item) {
+  margin-top: 1.2em;
+}
+
+.project h2 {
+  margin: 2em 0 0.8em;
+}
+
+.project figure {
+  margin: 0 0 1.6em;
+}
+
+.project img,
+.project video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.project figure img,
+.project .video {
+  border: 1px solid var(--dim);
+}
+
+.project .video {
+  margin: 0 0 1.6em;
+  /* Holds the space until the video's real size is known. */
+  min-height: 8em;
+}
+
+.project figcaption {
+  margin-top: 0.5em;
+  color: var(--dim);
+  font-size: 0.85em;
+}
+
+.project .rule {
+  margin: 2em 0;
+  border-top: 1px solid var(--dim);
+}
+
+/* ---------- Project overview: list on the left, preview on the right ---------- */
+
+.project-list {
+  max-width: none;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 6ch;
+  align-items: start;
+  align-content: start;
+}
+
+.project-list h1 {
+  grid-column: 1 / -1;
+}
+
+.preview {
+  /* Stays in view while a long list scrolls. */
+  position: sticky;
+  top: 9vmin;
+  max-width: 44rem;
+}
+
+.preview-media {
+  border: 1px solid var(--dim);
+}
+
+.preview-media video,
+.preview-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.preview-caption {
+  margin: 0.5em 0 0;
+  color: var(--dim);
+  font-size: 0.85em;
+}
+
+@media (max-width: 900px) {
+  .project-list {
+    display: block;
+  }
+  .preview {
+    display: none;
+  }
+}

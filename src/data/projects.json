@@ -1,0 +1,209 @@
+[
+  {
+    "title": "Henningsvaer Pride",
+    "date": "Summer 2025",
+    "category": "CONCEPT",
+    "mediaName": "henningsvaer-pride",
+    "noMedia": false,
+    "projectLink": "https://next-sanity-navy-zeta.vercel.app/",
+    "description": [
+      "<figure><img src='/videos/demos/henningsvaer-pride_demo.jpg' /></figure>",
+      "I built a concept website for <strong>Henningsvær’s Pride celebrations</strong> using <strong>Next.js, Tailwind, GSAP, Sanity</strong>, and some <strong>WebGL magic</strong>.",
+      "The main idea was to explore how <strong>Next.js and Sanity</strong> work together. It turned out to be a really intuitive setup — both for developers and clients — since Sanity essentially lets you design your own CMS.",
+      "At the same time, I was experimenting with <strong>WebGL shaders</strong>. The site’s background uses a custom gradient shader I made by hand, which I later optimized for performance with <strong>React Three Fiber</strong>. Originally, the homepage had a GIF for the Pride flag, but once I realized how simple it was to build my own animated shader flag, I switched it out.",
+      "Working with <strong>GSAP</strong> was another highlight. It integrated smoothly with Next.js, and even small animations made the site feel much more alive.",
+      "<strong style='font-size:1.5rem;'>Some of the projects features include:</strong>",
+      "<li>Fetching & visualising content from <strong>Sanity</strong></li>",
+      "<li>A custom <strong>Sanity Studio</strong> setup for editing</li>",
+      "<li><strong>Locale-based content</strong> (/en & /no) with translations pulled from a custom JSON dictionary</li>",
+      "<li><strong>GSAP & WebGL</strong> animations</li>",
+      "<li>A <strong>fully custom design</strong> built from scratch</li>",
+      "Overall, I had a great time designing the site, building the <strong>UI/UX</strong>, and structuring the <strong>CMS</strong>. It was a solid learning experience and left me excited to create more projects with this kind of stack!"
+    ]
+  },
+  {
+    "title": "Custom Shopify setup",
+    "date": "2024-2025",
+    "category": "HOBBY",
+    "mediaName": "shopify-setup",
+    "noMedia": false,
+    "projectLink": "https://shopify-nuxt-integration.vercel.app/",
+    "description": [
+      "<figure><img src='/images/demos/shopify_nuxt_productpage.jpg' /></figure>",
+      "Around mid-2024, during my travels, I decided to start exploring how to build custom e-commerce sites — specifically by setting up my own <strong>NUXT 3 + Shopify integration</strong>.",
+      "Most Shopify templates you can buy or use for free tend to feel a bit <em>dull</em>. I get why they’re great for startups or small businesses who want to launch fast, but to me, they often feel like a <strong>“one-size-fits-all” solution</strong>. I wanted to see how much effort it would take to create something <em>simple, customisable, and a bit more fun</em> — something that could potentially be a solid alternative for these businesses.",
+      "I hadn’t worked much with GraphQL before, so learning how to structure the data and write the queries took some getting used to. But once I got the hang of it, <strong>the development process felt smooth and straightforward</strong>.",
+      "I chose to work with NUXT 3 because Vue has been my favourite framework so far. I’d briefly used NUXT before during my <strong>Gazelle project</strong> and found it intuitive and flexible. <strong>Pairing it with Pinia</strong> gave me a lot of control over state management, allowing me to build something with great performance.",
+      "There’s still a bunch of improvements and updates I want to add over time — and I will — but as a baseline for smaller Shopify projects, I’m pretty happy with where it’s at. <em>Shaping it to fit a client’s needs should be smooth sailing from here</em> B).",
+      "<strong style='font-size:1.5rem;'>What inspired me?</strong>",
+      "<li>I took a lot of inspiration from sites like:</li>",
+      "<li><a href='https://fawbooks.com/' target='_blank'>Fawbooks</a></li>",
+      "<li><a href='https://bluemarbleparis.com/' target='_blank'>Blue Marble Paris</a></li>",
+      "<li><a href='https://voostore.com/en-se' target='_blank'>Voostore</a></li>",
+      "<li><a href='https://www.tursnowboards.com/' target='_blank'>Tur Snowboards</a></li>",
+      "<li><a href='https://pleasuresnow.com/' target='_blank'>Pleasures</a></li>",
+      "<li><a href='https://wearebraindead.com/' target='_blank'>Braindead</a></li>",
+      "I spent quite a bit of time digging into the small details that make modern e-com sites feel good — finding those little <em>silver linings</em> that make the user experience smooth, fun, and effective.",
+      "<strong style='font-size:1.5rem;'>Wanna try it out?</strong>",
+      "If you’re curious and want to check out the setup — or even use it yourself — you can find the project here: <a href='https://github.com/Muridae-dev/shopify-nuxt-integration' target='_blank'>github.com/Muridae-dev/shopify-nuxt-integration</a>.",
+      "Feel free to drop a PR if you’ve got ideas or improvements — or just reach out to me via email if you have any questions!"
+    ]
+  },
+  {
+    "title": "Gazelle",
+    "date": "2023",
+    "category": "DEPT",
+    "mediaName": "gazelle",
+    "noMedia": true,
+    "projectLink": "https://www.gazellebikes.com/en-gb",
+    "description": [
+      "<figure><img src='/images/demos/gazelle_homepage.jpg' /></figure>",
+      "This was my second proper project at DEPT — working all the way from scratch to release — and it was my first time working with NUXT in a professional setting.",
+      "It was just me and a colleague of mine as frontend devs, which <em>I really enjoyed</em>. <em>We hit it off from the start</em> & work-wise, we made <strong>project decisions fast and effective</strong> and had lots of great discussions around different coding solutions. <strong>Together we built a great relationship with the client</strong>, which made the whole process smooth and fun.",
+      "<em>Some things could’ve been more effective</em> — we were lacking some structure at times, mostly due to the absence of a project manager — but with time, <em>we worked out those kinks</em>, and the two of us really stepped up during the process.",
+      "<strong style='font-size:1.5rem;'>What were some of my proudest moments?</strong>",
+      "<li><strong>Worked extensively with the client’s API</strong> — <em>which data-wise was a mess</em> — structuring the data and saving bits to our store to reduce redundant calls.</li>",
+      "<figure><img src='/images/demos/gazelle_bike_selector.jpg' /><figcaption><a href='https://www.gazellebikes.com/en-gb/ebikes/grenoble-c5-hmb' target='_blank'>Example of a bike-page</a> using dynamic API data</figcaption></figure>",
+      "<li>Used the data to create multiple <strong>dynamic solutions</strong>, such as the <strong>color and model picker</strong> for each individual bike model.</li>",
+      "<figure><img src='/images/demos/gazelle_color_picker.jpg' /><figcaption>Color/model picker leading to different routes, providing new dynamic data</figcaption></figure>",
+      "<li>Managed to integrate our client’s API with Google Maps, even though I hadn’t worked with map-based solutions before. <strong>The problem-solving involved here gave me a serious challenge</strong>, and I was thrilled to get it working.</li>",
+      "<figure><img src='/images/demos/gazelle_map_integration.jpg' /><figcaption>Final version of <a href='https://www.gazellebikes.com/en-gb/bike-store' target='_blank'>google maps integration</a></figcaption></figure>",
+      "<li><strong>Building and fostering</strong> a great relationship within the team and with the client.</li>",
+      "<li><em>All the discussions and solutions</em> I worked on with my colleague. It taught me a lot about Vue, NUXT, and coding in general.</li>",
+      "<strong style='font-size:1.5rem;'>Technologies used within the project consisted mainly of:</strong>",
+      "<li>NUXT.js</li>",
+      "<li>Pinia</li>",
+      "<li>Storyblok</li>",
+      "<li>Client's APIs</li>"
+    ]
+  },
+  {
+    "title": "Ramboll.com",
+    "date": "2022-2023",
+    "category": "DEPT",
+    "mediaName": "ramboll",
+    "noMedia": true,
+    "projectLink": "https://www.ramboll.com/",
+    "description": [
+      "<figure><img src='/images/demos/ramboll_homepage.jpg' /></figure>",
+      "This was my first project at DEPT, starting off as a trainee. I asked around wherever I could for projects — as at the time frontend work was somewhat scarce — and I managed to get a position on this project from the start.",
+      "Me and the team worked together from a <strong>POC all the way to a final release</strong>, and <em>it taught me a lot</em>. Getting to work with <u>NEXT.js</u>, working & communicating with clients, doing presentations, discussions with the team, deadlines — <em>all that good stuff</em>.",
+      "<em>I applied myself to take a strong role within the team, putting myself out there whenever I could</em> & <strong>it paid off</strong>. I got a lot of responsibilities, like handling communications with the client, <strong>making project decisions</strong>, calculating risk, structuring the project, and so on.",
+      "<strong style='font-size:1.5rem;'>What were some of my proudest moments?</strong>",
+      "<li>I did the entire <strong>header structure and logic for the website</strong>. Although <em>looking back I could’ve done a better job</em> at structuring it — <em>some of the logic behind multiple sections could’ve been more slick, especially on mobile</em> — I managed to get it to a good working state, where the client had <u>multiple choices between header sections and selections</u>.</li>",
+      "<figure><img src='/images/demos/ramboll_navigation.jpg' /><figcaption>Nav menu live on <a href='https://www.ramboll.com/' target='_blank'>Ramboll.com</a></figcaption></figure>",
+      "<li><strong>Worked on a search/filtering system</strong> within their <em>open positions</em> page and their <em>contact us</em> page, grabbing data from their API and posting only the necessary data for each individual search.</li>",
+      "<figure><img src='/images/demos/ramboll_filtering.jpg' /><figcaption>Filtering options on <a href='https://www.ramboll.com/careers' target='_blank'>open positions page</a></figcaption></figure>",
+      "<li><strong>Holding sprint presentations for the client</strong>.</li>",
+      "<li><strong>Building & fostering</strong> a great relationship within the team and with the client.</li>",
+      "<strong style='font-size:1.5rem;'>Technologies used within the project consisted mainly of:</strong>",
+      "<li>NEXT.js</li>",
+      "<li>Kontent.AI</li>",
+      "<li>Client's API</li>"
+    ]
+  },
+  {
+    "title": "SavemissX",
+    "date": "2019",
+    "category": "HOBBY",
+    "mediaName": "savemissx",
+    "description": [
+      "Being a fan of video-games throughout my life, I’ve wanted to try my hand at making one myself & although this wasn’t my first game, it was the first one I was truly proud of. Having created a game in Java before, I found the language <strong><a href='https://haxeflixel.com/' target='_blank'>Haxeflixel</a></strong> & I started off following a <a href='https://haxeflixel.com/documentation/tutorial/' target='_blank'>tutorial</a> to get a gist of how the language worked.",
+      "Once I had the tutorial down, I started tinkering with the code & turned the top-down dungeon crawler to <strong>a fast paced 2d side-scroller with elements of Super Smash Bros.</strong> I used a tool called <a href='https://www.aseprite.org/' target='_blank'>Aseprite</a> to create the visuals and animations & <a href='https://ogmo-editor-3.github.io/' target='_blank'>OGMO Editor</a> to create the maps.",
+      "<strong>I created:</strong> 7 different stages with 3 different backgrounds, character features such as: double jumping, climbing, running, 5 unique attacks & animations and a power up feature called <em>RAGE</em>. The game also features 2 kinds of enemies, a flying- and a grounded enemy.",
+      "Working with the game turned into a game itself, gaining new code-knowledge allowed me to <em>“unlock” new features for the game</em> & kept inspiring me to find clever- out of the box solutions to keep updating the game. I really had a blast working on this & I’m stoked to keep exploring new possibilities of game-development / gamification!"
+    ]
+  },
+  {
+    "title": "DODGETHEVIRUS",
+    "date": "2021",
+    "category": "HYPERISLAND",
+    "mediaName": "dodgethevirus",
+    "description": [
+      "This is <strong>DODGE THE VIRUS!</strong> It’s an escape-room type game where you have to navigate through funky websites in order to reach <strong>THE DRAGON</strong> & solve his riddles. During your journey, you’ll have to avoid malicious websites that give you a <strong>VIRUS.</strong> Being a victim of a <strong>VIRUS</strong> breaks the game & you’ll need to restart in order to continue.",
+      "This was my first task at <strong>Hyper Island</strong> where we were introduced to <strong>HTML, CSS & Javascript</strong>. Our task was to simply create a website that utilised each language in some way. I wanted to try out as many features as I could so I decided to make a whole bunch of websites to try different features & strung them all together.",
+      "All the pages are native <strong>HTML/CSS/JS</strong> <em>with a touch of jQuery</em> & everything is loaded dynamically through objects. It ended up turning into kind of a low-end <em>“component-based framework”</em> which at the time I had no idea what it was, so it was a happy surprise to see later on in my studies that web-development is heading in that direction!"
+    ]
+  },
+  {
+    "title": "Marketplace",
+    "date": "2022",
+    "category": "HYPERISLAND",
+    "mediaName": "marketplace",
+    "description": [
+      "During my studies at Hyper Island we had a <span>Data-interaction module</span> & our task was to request or post information from/to a server. I wanted to try out both methods so I decided to create a Marketplace, somewhat similar to E-bay where users can create accounts, post items to the market & trade items with other users.",
+      "<strong>I built a MERN-stack</strong> working together with a <strong>Mongodb server</strong>, used <strong>bcrypt</strong> for user-registration & login, user authentication through <strong>JSON-webtokens</strong> & saving images to the server using <strong>Multer</strong>.",
+      "In the marketplace you can view other users' item, filter said items using tags & <em>REQUEST TRADEs</em>. The owner of a trade-requested item will be notified in the Inventory and can then choose to <em>ACCEPT TRADE</em>, which will lead to the requesting user to receive said item in their inventory."
+    ]
+  },
+  {
+    "title": "The Hills",
+    "date": "2022",
+    "category": "HYPERISLAND",
+    "mediaName": "thehills",
+    "description": [
+      "During my Hyper Island studies, we tackled 'The Hills,' a collaborative project emphasizing Agile methodologies and MERN-stack development. My prior experience led me to propose and spearhead the MERN-stack setup, guiding our diverse team through its implementation. Engaging in <em>pair- and mob-programming</em>, we embraced weekly sprints, daily standups, and role rotations between <em>scrum master and project owner</em>, enriching our understanding through diverse perspectives.",
+      "The project challenge was to conceptualize a product beyond our deadline's scope, focusing on customer value. We envisioned a virtual real estate app allowing users to buy, customize apartments with <em>in-app currency</em>, and explore progressively upscale options. Although we couldn't complete the app, our interactive demo, powered by a <strong>Mongodb-database</strong>, showcased editable apartments, effectively conveying our vision and demonstrating potential value to users."
+    ]
+  },
+  {
+    "title": "Blackjack",
+    "date": "2022",
+    "category": "HYPERISLAND",
+    "mediaName": "blackjack",
+    "description": [
+      "This project was when I was introduced to <em>component based frameworks</em>. Our brief was to use <strong>React</strong> and build an app together with an API. Most open-source APIs I found were uninspiring, but I found one that stuck out, which was the <strong>deck of cards API</strong>.",
+      "I chose to use the API to simulate <strong>BLACKJACK</strong>, simple I thought at first, however, it was a bit more complicated than I anticipated. Due to the rules of the game, there’s quite a lot to consider: first off there’s betting, you can ask for more cards, you can bust -losing due to too high value-, Aces automatically going between 11 and 1, and creating a system for the dealer AI.",
+      "I had a lot of fun with the challenge & it was surprisingly fitting to use a <em>component based framework</em> for Blackjack, using cards, hands, players, and pot as separate components."
+    ]
+  },
+  {
+    "title": "Tombraiders",
+    "date": "2021",
+    "category": "HYPERISLAND",
+    "mediaName": "tombraiders",
+    "description": [
+      "This was my third group project at Hyper Island where our brief was to create a game within <a href='https://phaser.io/' target='_blank'>Phaser</a>, a framework used to make games in Javascript.",
+      "I was chosen to lead the team throughout the process, my tasks were structuring weekly sprints & tickets for the team to cover, holding workshops to explain the basics of game-design & making sure the team's ideas would come through in a time-efficient manner.",
+      "We ended up creating a 2d-platformer called “Tombraiders”, we used <strong>Phaser</strong> for the in-game features and a tile map editor called <a href='https://www.mapeditor.org/' target='_blank'>Tiled</a> for the maps. The game includes features such as double-jumping, attacking, enemy AI, keys to unlock doors, and 4 different levels."
+    ]
+  },
+  {
+    "title": "Honorable Mentions",
+    "date": "",
+    "category": "",
+    "mediaName": "honorable-mentions",
+    "noMedia": true,
+    "description": [
+      "These are some of the minor projects & accomplishments I’ve worked on throughout the years:",
+      "In 2024, right before leaving DEPT, I created a <strong>tracking script for the website</strong> <a href='https://www.sohohome.com/' target='_blank'>Soho Home</a>, hooked up to software within Salesforce Commerce Cloud to track user behavior on the website using third-party cookies. Tracking would consist of:",
+      "<li><strong>Stitching together a profile for each user</strong> navigating the website; this would start with grabbing their IP and adding data such as email, name, etc., whenever they would provide that information anywhere on the website.</li>",
+      "<li><strong>Tracking which types of pages the user navigated to</strong>.</li>",
+      "<li><strong>What items they added to their carts</strong>, including data such as categories, collections, quantities, price-tags, etc.</li>",
+      "<li><strong>Checkout process & how far they got</strong> in said process.</li>",
+      "<li><strong>Creating a “schema”</strong> of what types of sub-pages users would navigate to, e.g., collection-, product-, home-page, etc.</li>",
+      "<em>It was a pretty tough challenge since the integration was run in third-party software.</em> While lots of the code was written in native JavaScript, there were many third-party scripts I had to learn on short notice with somewhat lackluster documentation. That being said, I had a lot of fun on the project as it involved a lot of problem-solving and outside-the-box thinking.",
+      "<em>I was really happy with the end result; the script ended up being streamlined, well-structured for future developers to pick up, and worked surprisingly well — especially considering the initial circumstances. Both I, the client, and DEPT were really happy with my efforts!</em>",
+      "<hr>",
+      "After leaving DEPT, I started picking up some side projects while I was figuring out my life back in Stockholm. One of them was to create a <strong>custom E-commerce solution for Shopify</strong>. I know some people who have created their own Shopify shops using the built-in templates, and while it does a good job of getting your shop live on short notice, I feel like it lacks personal charm and performance.",
+      "So, I made my own Shopify account and started playing around with their API. <em>I’m a big fan of VUE/NUXT</em>, so I decided to hook the API up with NUXT. Initially, it was pretty overwhelming; I had a hard time finding concrete examples of NUXT + Shopify, and having never touched GraphQL before, I got stuck before even getting started.",
+      "However, with some patience, stitching together solutions from different corners of the internet, and some back-and-forth discussions with ChatGPT, I got a working POC up and running. It included:",
+      "<li><strong>Displaying products</strong> from my Shopify store on different parts of the site.</li>",
+      "<li><strong>Having products categorized</strong> by collections.</li>",
+      "<li><strong>Saving products to a cart</strong>.</li>",
+      "<li><strong>Providing a custom checkout link</strong> to said cart.</li>",
+      "<em>The plan was to learn how to develop E-commerce sites from scratch using NUXT and create a baseline if I’m ever to pick up any custom Shopify projects in the future, and in that, I feel like I succeeded.</em>",
+      "<em>You can find the project on my <a href='https://github.com/Muridae-dev/shopify-nuxt-integration' target='_blank'>GitHub</a>.</em>",
+      "<hr>",
+      "I worked for <strong>TeamTownSports</strong>, an E-commerce site for a Canadian sporting retailer, at the end of my tenure at DEPT. By the time I got into the project, they had just gone live, meaning lots of team members were starting to drop off. The plan was for me to take over all the <strong>front-end responsibilities</strong> over the course of a month or two.",
+      "It was set up with <strong>Salesforce Commerce Cloud (SFCC)</strong> and was hooked up to DEPT’s own TamTam setup. <em>It wasn’t my cup of tea in terms of framework</em>, and my tasks consisted mostly of bug-fixing. However, the team was really fun to work with, and since I was the sole front-end developer, I got lots of responsibilities in terms of:",
+      "<li><strong>Presentations</strong></li>",
+      "<li><strong>Communications with the client</strong></li>",
+      "<li><strong>Creating and structuring tickets</strong></li>",
+      "<li><strong>Setting realistic expectations</strong></li>",
+      "<hr>",
+      "At the start of my tenure at DEPT, I was put on the “service desk” — DEPT’s department for long-term site maintenance. What that meant was that I was given tickets on finished projects that had minor bugs, issues, and/or wanted to add new smaller features.",
+      "<em>It was a good learning experience</em>, as I had to locate, download, and orient myself in multiple projects and then find the issues that needed looking into. I got pretty good at <strong>“code investigation,”</strong> finding ways to locate bugs in live environments, locally, and in the code, then solving them."
+    ]
+  }
+]
